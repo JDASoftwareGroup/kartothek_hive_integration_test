@@ -38,10 +38,5 @@ Currently the validation is done for the following data types: `'bool', 'bytes',
 In order to spin up the docker-compose cluster, 
 
 - Build the images locally (if required) using: `make build` 
-- Then bring up all required services using: `make run`
-- By default a docker container exits after the main process, defined with the `CMD` instruction, exits. For local development, we therefore
-run `sleep 365d` as the `CMD` instead, in order to keep the `test-executor` alive
-
-If you want to test code interactively execute code from the `test-executor` service with the following commands:
-
-    docker-compose exec test-executor python  # Open a shell inside `test-executor`
+- Then bring up all required services using: `make run`. To _follow_ the logs of the testing container, run `docker-compose logs -f test-executor`.
+- By default the testing container will exit once the `CMD` instruction finishes execution. For local development, we can use `sleep 365d` as the `CMD` instead, in order to keep the `test-executor` alive indefinitely. Then, if you want to interactively execute Python code inside the `test-executor` service you can run the following command `docker-compose exec test-executor python`
